@@ -15,12 +15,13 @@ var (
 type cUpload struct{}
 
 func (h *cHello) Upload(ctx context.Context, req *apiv1.UploadReq) (res *apiv1.UploadRes, err error) {
-	files := g.RequestFromCtx(ctx).GetUploadFiles("upload-file")
-	names, err := files.Save("/tmp/")
+	file := g.RequestFromCtx(ctx).GetUploadFile("upload-file")
+	tableName, err := file.Save("/tmp/")
 	if err != nil {
 		return nil, err
 	}
-	g.RequestFromCtx(ctx).Response.WriteJsonExit(names)
-
+	res = &apiv1.UploadRes{
+		TableName: tableName,
+	}
 	return
 }

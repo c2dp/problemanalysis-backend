@@ -8,5 +8,6 @@ type UploadReq struct {
 	g.Meta `type:"file" path:"/upload" tags:"Upload" method:"post" summary:"Upload File"`
 }
 type UploadRes struct {
-	g.Meta `mime:"text/html" example:"string"`
+	g.Meta    `example:"string"`
+	TableName string
 }
